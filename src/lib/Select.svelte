@@ -750,7 +750,13 @@
                         class="multi-item"
                         class:active={activeValue === i}
                         class:disabled
-                        on:click|preventDefault={() => (multiFullItemClearable ? handleMultiItemClear(i) : {})}
+                        on:mouseover={() => dispatch("mouseoverMultiItem", item)}
+                        on:mouseout={() => dispatch("mouseoutMultiItem", item)}
+                        on:click={() => dispatch("clickMultiItem", item)}
+                        on:click|preventDefault={() => {
+                            dispatch("clickMultiItem", item);
+                            (multiFullItemClearable ? handleMultiItemClear(i) : {});
+                        }}
                         on:keydown|preventDefault|stopPropagation
                         role="none">
                         <span class="multi-item-text">
